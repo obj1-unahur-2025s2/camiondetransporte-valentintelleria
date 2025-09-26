@@ -2,6 +2,7 @@ import camion.*
 import cosas.*
 
 describe "test del camion" {
+/*
   method inicialitaze() {
     camion.cargar(knightRider)
     camion.cargar(arena)
@@ -10,8 +11,14 @@ describe "test del camion" {
     ladrillos.cantidad(10)
     camion.cargar(ladrillos)
   }
+*/
 
   test "el camion tiene un peso total de 1720" {
+    camion.cargar(knightRider)
+    camion.cargar(arena)
+    arena.peso(200)
+    ladrillos.cantidad(10)
+    camion.cargar(ladrillos)
     assert.equals(1720, camion.pesoTotal())
   }
 

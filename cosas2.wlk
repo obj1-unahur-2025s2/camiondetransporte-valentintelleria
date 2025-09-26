@@ -9,6 +9,14 @@ object knightRider {
     method esPesoPar() {
         return self.peso().even()
     }
+
+    method bultos() {
+        return 1
+    }
+
+    method consecuenciasDeLaCarga() {
+
+    }
 }
 
 object bumblebee {
@@ -37,6 +45,14 @@ object bumblebee {
     method esPesoPar() {
         return self.peso().even()
     }
+
+    method bultos() {
+        return 2
+    }
+
+    method consecuenciasDeLaCarga() {
+        self.trasformateEnRobot()
+    }
 }
 
 object ladrillos {
@@ -57,7 +73,24 @@ object ladrillos {
     method esPesoPar() {
         return self.peso().even()
     }
+
+    method bultos() {
+        if (cantidad <= 100) {
+            return 1
+        } else if (cantidad.between(101, 300)) {
+            return 2
+        }
+        else {
+            return 3
+        }
+    }
+
+    method consecuenciasDeLaCarga() {
+        cantidad = cantidad + 12
+    }
 }
+    
+
 
 object arena {
     var peso = 0
@@ -75,6 +108,14 @@ object arena {
 
     method esPesoPar() {
         return self.peso().even()
+    }
+
+    method bultos() {
+        return 1
+    }
+
+    method consecuenciasDeLaCarga() {
+        peso = (peso - 10).max(0) 
     }
 }
 
@@ -99,6 +140,18 @@ object bateriaAntiaerea {
 
     method esPesoPar() {
         return self.peso().even()
+    }
+
+    method bultos() {
+        if (estaConMisiles) {
+            return 2
+        } else {
+            return 1
+        }
+    }
+
+    method consecuenciasDeLaCarga() {
+        self.cargarMisiles()
     }
 }
 
@@ -132,9 +185,19 @@ object contenedor {
     method esPesoPar() {
         return self.peso().even()
     }
+
+    method bultos() {
+        return 1 + cosasAdentro.sum({ elemento => elemento.bultos()})
+    }
+
+    method consecuenciasDeLaCarga() {
+        if (not cosasAdentro.isEmpty()){
+            cosasAdentro.forEach({elemento => elemento.consecuenciasDeLaCarga()})
+        }
+    }
 }
 
-object residuo {
+    object residuo {
     var property peso = 0
 
     method peligrosidad() {
@@ -143,6 +206,14 @@ object residuo {
   
     method esPesoPar() {
         return self.peso().even()
+    }
+
+    method bultos() {
+        return 1
+    }
+
+    method consecuenciasDeLaCarga(){
+        peso = peso + 15
     }
 }
 
@@ -163,5 +234,12 @@ object embalaje {
 
     method esPesoPar() {
         return self.peso().even()
+    }
+
+    method bultos() {
+        return 2
+    }
+    method consecuenciasDeLaCarga() {
+        
     }
 }
